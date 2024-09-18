@@ -90,9 +90,11 @@
     padding: 0;
     place-items: center;
 
-    a {
-      margin: auto;
-      text-decoration: none;
+    .btn {
+      --btn-color: var(--bubble-color);
+
+      appearance: none;
+      font-weight: 800;
     }
 
     .windshield .bubble:hover & {

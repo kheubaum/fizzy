@@ -1,3 +1,6 @@
-<%= button_to project_bubble_boosts_path(bubble.project, bubble), data: { action: "toggle-class#toggle" } do %>
+<%= button_to project_bubble_boosts_path(bubble.project, bubble),
+    class: "btn btn--plain",
+    data: { action: "toggle-class#toggle" },
+    form_class: "full-width" do %>
   + <%= bubble.boosts.size if bubble.boosts.any? %>
 <% end %>
