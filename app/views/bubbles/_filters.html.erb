@@ -17,32 +17,32 @@
     </button>
 
     <div class="flex-inline center align-center gap-half">
-      <%= filter_chip_tag filter.indexed_by.humanize, **filter.params_without(:indexed_by, filter.indexed_by) unless filter.default_indexed_by? %>
+      <%= filter_chip_tag filter.indexed_by.humanize, filter.params_without(:indexed_by, filter.indexed_by) unless filter.default_indexed_by? %>
 
       <% filter.tags.each do |tag| %>
-        <%= filter_chip_tag tag.hashtag, **filter.params_without(:tag_ids, tag.id) %>
+        <%= filter_chip_tag tag.hashtag, filter.params_without(:tag_ids, tag.id) %>
       <% end %>
 
       <% filter.assignees.each do |assignee| %>
-        <%= filter_chip_tag "for #{assignee.name}", **filter.params_without(:assignee_ids, assignee.id) %>
+        <%= filter_chip_tag "for #{assignee.name}", filter.params_without(:assignee_ids, assignee.id) %>
       <% end %>
 
       <% if filter.assignments.present? %>
-        <%= filter_chip_tag filter.assignments.humanize, **filter.params_without(:assignments, filter.assignments) %>
+        <%= filter_chip_tag filter.assignments.humanize, filter.params_without(:assignments, filter.assignments) %>
       <% end %>
 
       <% filter.assigners.each do |assigner| %>
-        <%= filter_chip_tag "by #{assigner.name}", **filter.params_without(:assigner_ids, assigner.id) %>
+        <%= filter_chip_tag "by #{assigner.name}", filter.params_without(:assigner_ids, assigner.id) %>
       <% end %>
 
       <% if filter.buckets.many? %>
         <% filter.buckets.each do |bucket| %>
-          <%= filter_chip_tag "in #{bucket.name}", **filter.params_without(:bucket_ids, bucket.id) %>
+          <%= filter_chip_tag "in #{bucket.name}", filter.params_without(:bucket_ids, bucket.id) %>
         <% end %>
       <% end %>
 
       <% filter.terms.each do |term| %>
-        <%= filter_chip_tag %Q("#{term}"), **filter.params_without(:terms, term) %>
+        <%= filter_chip_tag %Q("#{term}"), filter.params_without(:terms, term) %>
       <% end %>
     </div>
   </div>
