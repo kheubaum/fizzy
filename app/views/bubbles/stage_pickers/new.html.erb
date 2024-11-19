@@ -1,14 +1,13 @@
 <%= turbo_frame_tag dom_id(@bubble, :stage_picker) do %>
   <% if @selected_workflow %>
-    <aside class="position-relative" style="--bubble-color: <%= @bubble.color %>"
+    <aside class="position-relative border pad border-radius" style="--bubble-color: <%= @bubble.color %>"
         data-controller="dialog" data-action="keydown.esc->dialog#close click@document->dialog#closeOnClickOutside">
-      <div class="flex flex-column">
-        <button class="btn center" data-action="click->dialog#toggle" data-dialog-modal-value="true">
+      <div class="flex align-center justify-start gap-half">
+        <button class="btn txt-small" data-action="click->dialog#toggle" data-dialog-modal-value="true">
           <%= image_tag "bolt.svg", aria: { hidden: true }, size: 24 %>
           <span class="for-screen-reader">Choose a workflow</span>
         </button>
-        <strong class="txt-large center"><%= @selected_workflow.name %></strong>
-        <hr class="separator--horizontal full-width" hidden />
+        <strong class="txt-large"><%= @selected_workflow.name %></strong>
       </div>
 
       <dialog class="workflow__popup panel fill-white shadow" data-dialog-target="dialog">
@@ -19,7 +18,8 @@
         </menu>
       </dialog>
 
-      <div class="workflow border pad border-radius margin-block-start-half">
+      <div class="workflow margin-block-start-half">
+        <hr class="separator--horizontal" aria-hidden="true" style="--border-color: var(--color-subtle)" />
         <div class="flex flex-column gap-half">
           <% @selected_workflow.stages.each do |stage| %>
             <%= button_to_set_stage @bubble, stage %>
