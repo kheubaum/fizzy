@@ -19,10 +19,7 @@ export default class extends Controller {
     observer.observe(this.element)
   }
 
-  async #fetch() {
-    const resp = await get(this.urlValue, { responseKind: "turbo-stream" })
-    const html = await resp.html
-
-    Turbo.renderStreamMessage(html)
+  #fetch() {
+    get(this.urlValue, { responseKind: "turbo-stream" })
   }
 }
