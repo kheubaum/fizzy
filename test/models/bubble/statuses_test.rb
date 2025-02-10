@@ -24,4 +24,27 @@ class Bubble::StatusesTest < ActiveSupport::TestCase
     assert_includes Bubble.published_or_drafted_by(users(:kevin)), bubble
     assert_includes Bubble.published_or_drafted_by(users(:jz)), bubble
   end
+
+  test "can_recover_abandoned_creation?" do
+    bubble = buckets(:writebook).bubbles.create! creator: users(:kevin)
+    unsaved_bubble = buckets(:writebook).bubbles.new creator: users(:kevin)
+
+    assert_not unsaved_bubble.can_recover_abandoned_creation?
+
+    bubble.update!(title: "Something worth keeping")
+    assert unsaved_bubble.can_recover_abandoned_creation?
+  end
+
+  test "recover_abandoned_creation" do
+    bubble_edited = buckets(:writebook).bubbles.create! creator: users(:kevin)
+    bubble_edited.update!(title: "Something worth keeping")
+
+    bubble_not_edited = buckets(:writebook).bubbles.create! creator: users(:kevin)
+
+    assert bubble_not_edited.can_recover_abandoned_creation?
+
+    assert_equal bubble_edited, bubble_not_edited.recover_abandoned_creation
+
+    assert_raises(ActiveRecord::RecordNotFound) { bubble_not_edited.reload }
+  end
 end

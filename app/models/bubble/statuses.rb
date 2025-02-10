@@ -7,15 +7,13 @@ module Bubble::Statuses
     scope :published_or_drafted_by, ->(user) { where(status: :published).or(where(status: :drafted, creator: user)) }
   end
 
-  class_methods do
-    def recently_abandoned_creation(user)
-      creating.where(creator: user).where("created_at != updated_at").where(updated_at: 1.day.ago..).last
-    end
+  def can_recover_abandoned_creation?
+    abandoned_creations.where(updated_at: 1.day.ago..).any?
+  end
 
-    def recover_recently_abandoned_creation(user)
-      recently_abandoned_creation(user).tap do |bubble|
-        creating.where(creator: user).excluding(bubble).destroy_all
-      end
+  def recover_abandoned_creation
+    abandoned_creations.last.tap do |bubble|
+      Bubble.creating.where(creator: creator).excluding(bubble).destroy_all
     end
   end
 
@@ -29,4 +27,9 @@ module Bubble::Statuses
       end
     end
   end
+
+  private
+    def abandoned_creations
+      Bubble.creating.where(creator: creator).where("created_at != updated_at").excluding(self)
+    end
 end
