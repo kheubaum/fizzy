@@ -93,3 +93,9 @@
   max-inline-size: calc(100dvw - (2 * var(--block-space-double)));
   z-index: 1;
 }
+
+.quick-filter:has(input:not(.default-value):checked) {
+  .input--select {
+    --input-background: var(--color-selected);
+  }
+}

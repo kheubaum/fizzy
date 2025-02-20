@@ -1,0 +1,38 @@
+<div class="quick-filter position-relative" data-controller="dialog" data-action="keydown.esc->dialog#close click@document->dialog#closeOnClickOutside">
+  <button class="btn input input--select flex-inline txt-small" data-action="click->dialog#open:stop">
+    <span class="overflow-ellipsis">
+      <%= filter.indexed_by.humanize %>
+    </span>
+  </button>
+
+  <dialog class="events__popup popup panel flex-column align-start gap-half fill-white shadow" data-dialog-target="dialog" data-action="turbo:before-cache@document->dialog#close">
+    <strong class="popup__title margin-block-start-half pad-inline-half">Sort by…</strong>
+    <%= form_with url: bubbles_path, method: :get, class: "flex flex-column full-width popup__list", 
+          data: { controller: "form" } do |form| %>
+      <% filter.as_params.except(:indexed_by).each do |key, value| %>
+        <%= filter_hidden_field_tag key, value %>
+      <% end %>
+      
+      <div class="btn popup__item">
+        <%= form.radio_button :indexed_by, filter.default_indexed_by, 
+            checked: filter.default_indexed_by?,
+            class: "default-value",
+            data: { action: "change->form#submit" } %>
+
+        <%= form.label :indexed_by, "Most active", value: filter.default_indexed_by, class: "overflow-ellipsis" %>
+        <%= image_tag "check.svg", aria: { hidden: true }, size: 18, class: "checked flex-item-justify-end" %>
+      </div>
+
+      <% Filter::INDEXES.each do |index| %>
+        <div class="btn popup__item">
+          <%= form.radio_button :indexed_by, index,
+              checked: filter.indexed_by == index,
+              data: { action: "change->form#submit" } %>
+
+          <%= form.label :indexed_by, index.humanize, value: index, class: "overflow-ellipsis" %>
+          <%= image_tag "check.svg", aria: { hidden: true }, size: 18, class: "checked flex-item-justify-end" %>
+        </div>
+      <% end %>
+    <% end %>
+  </dialog>
+</div> 

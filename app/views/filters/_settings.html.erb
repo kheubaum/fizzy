@@ -5,36 +5,22 @@
   </button>
 
   <div class="flex-inline center align-center gap-half">
-    <%= filter_chip_tag filter.indexed_by.humanize, filter.as_params_without(:indexed_by, filter.indexed_by) unless filter.default_indexed_by? %>
-
-    <% filter.tags.each do |tag| %>
-      <%= filter_chip_tag tag.hashtag, filter.as_params_without(:tag_ids, tag.id) %>
-    <% end %>
-
-    <% filter.assignees.each do |assignee| %>
-      <%= filter_chip_tag "for #{assignee.name}", filter.as_params_without(:assignee_ids, assignee.id) %>
-    <% end %>
-
-    <% if filter.assignment_status.present? %>
-      <%= filter_chip_tag filter.assignment_status.humanize, filter.as_params_without(:assignment_status, filter.assignment_status) %>
-    <% end %>
-
-    <% filter.assigners.each do |assigner| %>
-      <%= filter_chip_tag "by #{assigner.name}", filter.as_params_without(:assigner_ids, assigner.id) %>
-    <% end %>
-
-    <% filter.stages.each do |stage| %>
-      <%= filter_chip_tag "in #{stage.name}", filter.as_params_without(:stage_ids, stage.id) %>
-    <% end %>
-
-    <% if filter.buckets.many? %>
-      <% filter.buckets.each do |bucket| %>
-        <%= filter_chip_tag "in #{bucket.name}", filter.as_params_without(:bucket_ids, bucket.id) %>
-      <% end %>
-    <% end %>
+    <%= render "filters/indexed_by", filter: filter %>
+    <%= render "filters/buckets", filter: filter %>
+    <%= render "filters/tags", filter: filter %>
+    <%= render "filters/assignees", filter: filter %>
+    <%= render "filters/assigners", filter: filter %>
+    <%= render "filters/stages", filter: filter %>
 
     <% filter.terms.each do |term| %>
       <%= filter_chip_tag %Q("#{term}"), filter.as_params_without(:terms, term) %>
+    <% end %>
+
+    <% if any_filters?(filter) %>
+      <%= link_to bubbles_path, class: "btn btn--remove txt-small" do %>
+        <%= image_tag "close.svg", aria: { hidden: true }, size: 24 %>
+        <span class="for-screen-reader">Clear all</span>
+      <% end %>
     <% end %>
   </div>
 </div>

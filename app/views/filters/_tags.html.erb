@@ -1,0 +1,38 @@
+<div class="quick-filter position-relative" data-controller="dialog" data-action="keydown.esc->dialog#close click@document->dialog#closeOnClickOutside">
+  <button class="btn input input--select flex-inline txt-small" data-action="click->dialog#open:stop">
+    <span class="overflow-ellipsis">
+      <% if filter.tags.any? %>
+        <%= filter.tags.map(&:hashtag).to_sentence %>
+      <% else %>
+        Tagged…
+      <% end %>
+    </span>
+  </button>
+
+  <dialog class="events__popup popup panel flex-column align-start gap-half fill-white shadow" data-dialog-target="dialog" data-action="turbo:before-cache@document->dialog#close">
+    <strong class="popup__title margin-block-start-half pad-inline-half overflow-ellipsis">Tagged…</strong>
+    <%= form_with url: bubbles_path, method: :get, class: "flex flex-column full-width popup__list", 
+          data: { controller: "form" } do |form| %>
+      <% filter.as_params.except(:tag_ids).each do |key, value| %>
+        <%= filter_hidden_field_tag key, value %>
+      <% end %>
+      
+      <%= link_to bubbles_path(filter.as_params.except(:tag_ids)), class: "btn popup__item" do %>
+        <span class="overflow-ellipsis">Clear all</span>
+      <% end %>
+      
+      <% Current.account.tags.order(:title).each do |tag| %>
+        <div class="btn popup__item">
+          <%= form.check_box "tag_ids[]", { 
+            checked: filter.tags.include?(tag),
+            data: { action: "change->form#submit" },
+            include_hidden: false,
+          }, tag.id %>
+
+          <%= form.label "tag_ids[]", tag.hashtag, for: dom_id(tag, :filter), class: "overflow-ellipsis" %>
+          <%= image_tag "check.svg", aria: { hidden: true }, size: 18, class: "checked flex-item-justify-end" %>
+        </div>
+      <% end %>
+    <% end %>
+  </dialog>
+</div> 
