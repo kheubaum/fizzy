@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/basecamp/active_record-tenanted
-  revision: 93ba4bb51c0cf0c3940371f5b75edd99cbed1363
+  revision: 7eaede4988df3444d96366853cad317fa89073f4
   branch: fizzy-temporary
   specs:
     active_record-tenanted (0.1.0)
