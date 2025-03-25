@@ -8,7 +8,7 @@
 
 .events__container {
   --column-gap: clamp(var(--inline-space), 3cqmin, calc(var(--inline-space) * 3));
-  --grid-lines: 0.2rem;
+  --grid-lines: 0.1rem;
 
   display: grid;
   grid-template-columns: 5fr 2fr;
