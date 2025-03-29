@@ -77,19 +77,20 @@
           <% end %>
         </menu>
 
-        <menu class="filter__menu">
-          <li class="filter__label"><strong>In Stage</strong></li>
-          <% workflow = Current.account.workflows.first %>
-          <% workflow.stages.each do |stage| %>
-            <li>
-              <%= label_tag "stage_ids_#{stage.id}", class: "btn filter__button" do %>
-                <%= check_box_tag "stage_ids[]", stage.id, filter.stages.include?(stage), id: "stage_ids_#{stage.id}", hidden: true %>
-                <span><%= stage.name %></span>
-                <%= image_tag "close.svg", aria: { hidden: true }, size: 24 %>
-              <% end %>
-            </li>
-          <% end %>
-        </menu>
+        <% if workflow = Current.account.workflows.first %>
+          <menu class="filter__menu">
+            <li class="filter__label"><strong>In Stage</strong></li>
+            <% workflow.stages.each do |stage| %>
+              <li>
+                <%= label_tag "stage_ids_#{stage.id}", class: "btn filter__button" do %>
+                  <%= check_box_tag "stage_ids[]", stage.id, filter.stages.include?(stage), id: "stage_ids_#{stage.id}", hidden: true %>
+                  <span><%= stage.name %></span>
+                  <%= image_tag "close.svg", aria: { hidden: true }, size: 24 %>
+                <% end %>
+              </li>
+            <% end %>
+          </menu>
+        <% end %>
 
         <div class="filter__menu" role="group" aria-label="Tagged">
           <div class="filter__label"><strong>Tagged</strong></div>
