@@ -3,7 +3,7 @@
 
   <div class="card__body flex flex-column gap-half full-width flex-item-grow min-width max-width">
     <h3 class="card__title">
-      <%= bubble.title %>
+      <%= bubble_title(bubble) %>
     </h3>
     <div class="txt-small overflow-ellipsis txt-uppercase"><%= "Added to #{bubble.bucket.name} by #{bubble.creator.name}" %>
       <%= local_datetime_tag(bubble.created_at, style: :daysAgo) %>
