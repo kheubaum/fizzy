@@ -35,6 +35,7 @@ gem "rails_structured_logging", bc: "rails-structured-logging"
 
 group :development, :test do
   gem "debug"
+  gem "bundler-audit", require: false
   gem "brakeman", require: false
   gem "rubocop-rails-omakase", require: false
 end
