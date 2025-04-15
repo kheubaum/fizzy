@@ -1,6 +1,14 @@
 require "test_helper"
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
+  test "index" do
+    sign_in_as :kevin
+
+    get users_path
+    assert_match /#{users(:david).name}/, @response.body 
+    assert_match /#{users(:kevin).name}/, @response.body 
+  end
+
   test "new" do
     get new_user_path(params: { join_code: "bad" })
     assert_response :forbidden
@@ -20,12 +28,33 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :ok
   end
 
-  test "update" do
+  test "show" do
     sign_in_as :kevin
+
+    get user_path(users(:david))
+    assert_match /#{users(:david).name}/, @response.body 
+  end
+
+  test "update oneself" do
+    sign_in_as :kevin
+
+    get edit_user_path(users(:kevin))
+    assert_response :ok
 
     put user_path(users(:kevin)), params: { user: { name: "New Kevin" } }
     assert_redirected_to user_path(users(:kevin))
     assert_equal "New Kevin", users(:kevin).reload.name
+  end
+
+  test "update other as admin" do
+    sign_in_as :kevin
+
+    get edit_user_path(users(:david))
+    assert_response :ok
+
+    put user_path(users(:david)), params: { user: { name: "New David" } }
+    assert_redirected_to user_path(users(:david))
+    assert_equal "New David", users(:david).reload.name
   end
 
   test "destroy" do
