@@ -2,7 +2,7 @@ class Cards::ReadingsController < ApplicationController
   include CardScoped
 
   def create
-    @notification = Current.user.notifications.find_by(card: @card)
-    @notification.read
+    Current.user.notifications.unread.where(card: @card).read_all
+    @notifications = Current.user.notifications.unread.ordered.limit(20)
   end
 end

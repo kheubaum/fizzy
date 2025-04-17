@@ -1,1 +1,3 @@
-<%= turbo_stream.remove @notification %>
+<%= turbo_stream.update "notifications" do %>
+  <%= render collection: @notifications, partial: "notifications/notification" %>
+<% end %>
