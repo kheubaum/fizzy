@@ -1,4 +1,4 @@
-<section id="doing-cards" class="cards cards--doing" style="view-transition-name: cards-container;" data-controller="card-size" data-action="turbo:morph@window->card-size#resize">
+<section id="doing-cards" class="cards cards--doing" style="view-transition-name: cards-container;">
   <% if workflow = filter.single_workflow %>
     <%= render "cards/index/workflow_filter", workflow: workflow, filter: filter %>
   <% else %>
