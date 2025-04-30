@@ -74,4 +74,7 @@ Rails.application.configure do
 
   # Allow all hosts in development
   config.hosts = nil
+
+  config.active_job.queue_adapter = :solid_queue
+  config.solid_queue.connects_to = { database: { writing: :queue } }
 end

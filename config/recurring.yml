@@ -8,3 +8,6 @@ production:
   remove_abandoned_creations:
     class: RemoveAbandonedCreationsJob
     schedule: every hour
+  sqlite_backups:
+    class: SQLiteBackupsJob
+    schedule: every day at 05:00
