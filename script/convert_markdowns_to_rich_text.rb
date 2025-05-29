@@ -23,7 +23,6 @@ class MarkdownToActionTextConverter
   end
 
   private
-
     def process_images
       @doc.css("img").each do |img|
         src = img["src"].presence
