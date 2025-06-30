@@ -26,49 +26,15 @@
 
     /* Default icon styles */
     &:where(:has(.icon)) {
+      --icon-size: var(--btn-icon-size, 1.3em);
+
       text-align: start;
-
-      .icon {
-        --icon-size: var(--btn-icon-size, 1.3em);
-      }
-    }
-
-    &:where(.avatar) {
-      /* --btn-border-radius: var(--avatar-border-radius); */
-      --btn-padding: 0;
-      --btn-border-size: 0;
-      --hover-size: 0;
-
-      /* aspect-ratio: 1; */
-      block-size: var(--btn-size);
-      display: grid;
-      inline-size: var(--btn-size);
-      justify-content: unset;
-      place-items: center;
-
-      > * {
-        grid-area: 1/1;
-      }
-
-      img {
-        --icon-size: 100%;
-        block-size: 100%;
-        inline-size: 100%;
-        max-inline-size: unset;
-      }
-
-      @media (any-hover: hover) {
-        &:where(:not(:active):hover) {
-          filter: brightness(0.7);
-        }
-      }
     }
 
     /* Circle buttons */
     &.btn--circle,
     &[aria-label]:where(:has(.icon)),
     &:where(:has(.for-screen-reader):has(.icon)) {
-      --btn-border-radius: 50%;
       --btn-padding: 0;
 
       aspect-ratio: 1;

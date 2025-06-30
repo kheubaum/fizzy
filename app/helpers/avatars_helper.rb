@@ -11,7 +11,7 @@ module AvatarsHelper
   end
 
   def avatar_tag(user, hidden_for_screen_reader: false, **options)
-    link_to user_path(user), class: "avatar btn", data: { turbo_frame: "_top" },
+    link_to user_path(user), class: "avatar btn btn--circle", data: { turbo_frame: "_top" },
       aria: { hidden: hidden_for_screen_reader, label: user.name },
       tabindex: hidden_for_screen_reader ? -1 : nil do
       avatar_image_tag(user, **options)

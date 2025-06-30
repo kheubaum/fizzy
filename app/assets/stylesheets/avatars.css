@@ -2,6 +2,8 @@
   .avatar {
     --avatar-border-radius: 50%;
     --avatar-size-default: 5ch;
+      --btn-border-size: 0;
+      --hover-size: 0;
 
     aspect-ratio: 1;
     block-size: var(--avatar-size, var(--avatar-size-default));
@@ -20,6 +22,12 @@
       inline-size: var(--avatar-size, var(--avatar-size-default));
       max-inline-size: 100%;
       object-fit: cover;
+    }
+
+    &:where(a):not(:active):hover {
+      @media (any-hover: hover) {
+        filter: brightness(0.7);
+      }
     }
   }
 
