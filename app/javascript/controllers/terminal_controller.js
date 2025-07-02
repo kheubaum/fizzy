@@ -42,7 +42,9 @@ export default class extends Controller {
   }
 
   submitCommand({ target }) {
-    this.#submitCommand()
+    if (!this.#showHelpCommandEntered) {
+      this.#submitCommand()
+    }
   }
 
   handleKeyPress(event) {
@@ -91,7 +93,6 @@ export default class extends Controller {
   }
 
   get #showHelpCommandEntered() {
-    console.debug("CALLED?", this.inputTarget.value);
     return [ "/help", "/?" ].find(command => this.inputTarget.value.includes(command))
   }
 
