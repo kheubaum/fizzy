@@ -58,15 +58,15 @@ class Command::Parser::Context
     Collection.where("lower(name) like ?", "%#{string.downcase}%").first
   end
 
+  def filter
+    user.filters.from_params(params.permit(*Filter::Params::PERMITTED_PARAMS).reverse_merge(**FilterScoped::DEFAULT_PARAMS))
+  end
+
   private
     attr_reader :controller, :action, :params
 
     MAX_CARDS = 20
     MAX_CLOSED_CARDS = 10
-
-    def filter
-      user.filters.from_params(params.permit(*Filter::Params::PERMITTED_PARAMS).reverse_merge(**FilterScoped::DEFAULT_PARAMS))
-    end
 
     def viewing_card_perma?
       controller == "cards" && action == "show"
