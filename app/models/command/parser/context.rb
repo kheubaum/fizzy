@@ -3,6 +3,8 @@ class Command::Parser::Context
 
   MAX_CARDS = 75
 
+  # TODO: +source_context+, +originally_viewing_card_contents?+ and +original_cards+ are part
+  #   of a workaround for the "get insight" experiment. I'll remove once I remove that.
   def initialize(user, url:, script_name: "", source_context: nil)
     @user = user
     @url = url
