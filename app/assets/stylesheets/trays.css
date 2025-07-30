@@ -247,8 +247,13 @@
     .tray__new-notifications {
       display: none;
       position: relative;
+    }
 
-      .btn:has(&) {  /* Red dot */
+    .tray__dialog:has(.tray__item:nth-child(1n + 7)) & {
+      .tray__old-notifications { display: none; }
+      .tray__new-notifications { display: flex; }
+
+      .btn:has(.tray__new-notifications) { /* Red dot */
         &:after {
           background-color: oklch(var(--lch-red-medium));
           block-size: 1ch;
@@ -261,11 +266,6 @@
           translate: 25% -75%;
         }
       }
-    }
-
-    .tray__dialog:has(.tray__item:nth-child(1n + 7)) & {
-      .tray__old-notifications { display: none; }
-      .tray__new-notifications { display: flex; }
     }
   }
 
