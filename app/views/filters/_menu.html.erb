@@ -3,8 +3,8 @@
 
   <%= tag.dialog class: "fizzy-menu filter popup popup--animated panel margin-block-start-half",
         data: {
-              action: "turbo:before-cache@document->dialog#close keydown->navigable-list#navigate filter:changed->navigable-list#reset toggle->filter#filter",
-              controller: "filter navigable-list",
+              action: "turbo:before-cache@document->dialog#close keydown->navigable-list#navigate filter:changed->navigable-list#reset filter:changed->nav-section-expander#showAll toggle->filter#filter",
+              controller: "filter navigable-list nav-section-expander",
               dialog_target: "dialog",
               navigable_list_focus_on_selection_value: false,
               navigable_list_actionable_items_value: true } do %>

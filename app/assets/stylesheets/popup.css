@@ -45,10 +45,22 @@
   }
 
   /* Hide lists when all the items within are hidden */
-  .popup__section {
+  /* .popup__section {
     &:has(.popup__section-title:only-child),
     &:has(.popup__item[hidden]):not(:has(.popup__item:not([hidden]))) {
       display: none;
+    }
+  } */
+
+  .popup__section {
+    .popup__section-title {
+      background: orange;
+    }
+
+    &[open] {
+      .popup__section-title {
+        background: lime;
+      }
     }
   }
 

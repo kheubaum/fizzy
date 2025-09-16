@@ -36,7 +36,7 @@ module FiltersHelper
   end
 
   def collapsible_nav_section(title, &block)
-    tag.details class: "popup__section", data: { controller: "nav-section-expander", action: "toggle->nav-section-expander#toggle", nav_section_expander_key_value: title.parameterize }, open: true do
+    tag.details class: "popup__section", data: { controller: "nav-section-expander", action: "toggle->nav-section-expander#toggle", nav_section_expander_target: "section", nav_section_expander_key_value: title.parameterize }, open: true do
       concat(tag.summary(class: "popup__section-title") do
         concat title
         concat icon_tag "caret-down"

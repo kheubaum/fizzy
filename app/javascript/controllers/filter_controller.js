@@ -11,7 +11,7 @@ export default class extends Controller {
 
   filter() {
     this.itemTargets.forEach(item => {
-      if (filterMatches(item.innerText, this.inputTarget.value)) {
+      if (filterMatches(item.textContent, this.inputTarget.value)) {
         item.removeAttribute("hidden")
       } else {
         item.toggleAttribute("hidden", true)
