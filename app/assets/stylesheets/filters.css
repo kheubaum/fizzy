@@ -144,7 +144,7 @@
   }
 
   .filters--has-filters-set .filters__manage {
-    display: inline-flex;
+    display: flex;
   }
 }
 
