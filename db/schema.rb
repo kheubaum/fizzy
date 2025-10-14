@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_07_084223) do
+ActiveRecord::Schema[8.1].define(version: 2025_10_14_204033) do
   create_table "accesses", force: :cascade do |t|
     t.datetime "accessed_at"
     t.integer "collection_id", null: false
     t.datetime "created_at", null: false
-    t.string "involvement", default: "watching", null: false
+    t.string "involvement", default: "access_only", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
     t.index ["accessed_at"], name: "index_accesses_on_accessed_at", order: :desc
@@ -424,6 +424,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_07_084223) do
     t.datetime "created_at", null: false
     t.string "title"
     t.datetime "updated_at", null: false
+    t.index ["title"], name: "index_tags_on_title", unique: true
   end
 
   create_table "user_settings", force: :cascade do |t|
@@ -500,6 +501,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_07_084223) do
     t.datetime "updated_at", null: false
     t.text "url", null: false
     t.index ["collection_id"], name: "index_webhooks_on_collection_id"
+    t.index ["subscribed_actions"], name: "index_webhooks_on_subscribed_actions"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

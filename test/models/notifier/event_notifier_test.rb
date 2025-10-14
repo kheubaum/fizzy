@@ -34,14 +34,9 @@ class Notifier::EventNotifierTest < ActiveSupport::TestCase
     assert_equal [ users(:kevin) ], notifications.map(&:user)
   end
 
-  test "the published event creates notifications for subscribers as well as watchers" do
-    collections(:writebook).access_for(users(:jz)).watching!
-    notifications = Notifier.for(events(:logo_published)).notify
-
-    assert_equal users(:kevin, :jz).sort, notifications.map(&:user).sort
-  end
-
   test "links to the card" do
+    collections(:writebook).access_for(users(:kevin)).watching!
+
     Notifier.for(events(:logo_published)).notify
 
     assert_equal cards(:logo), Notification.last.source.eventable
