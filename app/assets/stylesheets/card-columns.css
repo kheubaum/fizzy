@@ -416,6 +416,14 @@
       }
     }
 
+    .card--drafted {
+      --card-color: var(--color-ink-medium) !important;
+
+      border-color: var(--card-color) !important;
+      border-style: dashed !important;
+      box-shadow: none !important;
+    }
+
     .card:has(.card__background img:not([src=""])) {
       .card__content,
       .card__meta,
@@ -568,14 +576,6 @@
 
     .card__body {
       padding-block: 0 var(--card-padding-block);
-    }
-
-    .card--drafted {
-      --card-color: var(--color-ink-medium) !important;
-
-      border-color: var(--card-color) !important;
-      border-style: dashed !important;
-      box-shadow: none !important;
     }
 
     .card__people-label {
