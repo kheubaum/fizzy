@@ -13,7 +13,7 @@ if command -v yq >/dev/null 2>&1; then
         SUGGESTIONS["$host"]="$host.sc-chi-int.37signals.com"
       fi
     fi
-  done < <(bin/kamal config -d "${KAMAL_DESTINATION:-production}" 2>/dev/null | yq '.":hosts"[]')
+  done < <(bin/kamal config -d "${KAMAL_DESTINATION:-production}" 2>/dev/null | yq -r '.":hosts"[]')
 
   if [ ${#SUGGESTIONS[@]} -gt 0 ]; then
     echo "Unqualified hostnames found in config/deploy.${KAMAL_DESTINATION:-production}.yml:" >&2
