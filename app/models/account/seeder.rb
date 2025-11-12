@@ -21,7 +21,7 @@ class Account::Seeder
 
   private
     def session
-      creator.identity.sessions.order(created_at: :desc).first
+      creator.identity.sessions.last
     end
 
     def populate

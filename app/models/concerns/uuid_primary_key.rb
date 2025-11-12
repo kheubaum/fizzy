@@ -13,7 +13,9 @@ module UuidPrimaryKey
   def self.generate_fixture_uuid(label)
     # Generate deterministic UUIDv7 for fixtures that sorts by fixture ID
     # This allows .first/.last to work as expected in tests
-    fixture_int = Digest::MD5.hexdigest("fixtures#{label}").hex % (2**31)
+    # Use the same CRC32 algorithm as Rails' default fixture ID generation
+    # so that UUIDs sort in the same order as integer IDs
+    fixture_int = Zlib.crc32("fixtures/#{label}") % (2**30 - 1)
 
     # Use fixture_int as second offset from a fixed base time (1 year before 2025-01-01)
     # This ensures all fixtures are in the past, and new test records are newest
