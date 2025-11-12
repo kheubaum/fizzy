@@ -43,7 +43,6 @@ module NotificationsHelper
           data: { action: "form#submit:stop badge#update:stop", form_target: "submit" },
           form: { data: { controller: "form" } } do
         concat(icon_tag("unseen"))
-        concat(tag.span("Mark as unread", class: "for-screen-reader"))
       end
     else
       button_to notification_reading_path(notification),
@@ -52,7 +51,7 @@ module NotificationsHelper
           data: { action: "form#submit:stop badge#update:stop", form_target: "submit" },
           form: { data: { controller: "form" } } do
         concat(icon_tag("remove"))
-        concat(tag.span("Mark as read", class: "for-screen-reader"))
+        concat(tag.span("1", class: "badge-count", data: { group_count: "" }))
       end
     end
   end

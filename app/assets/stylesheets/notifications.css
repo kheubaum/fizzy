@@ -29,22 +29,11 @@
       column-gap: var(--inline-space-half);
     }
 
-    .card__notification-unread-indicator {
-      font-size: var(--text-small);
-    }
-
     &:has(.card--notification) {
       .notifications-list__empty-message {
         display: none;
       }
     }
-  }
-
-  /* Grouped notifications
-  /* ------------------------------------------------------------------------ */
-
-  .notification--grouped {
-    border: 3px solid red;
   }
 
   /* Read items
@@ -61,12 +50,14 @@
 
     .card__notification-unread-indicator {
       --btn-background: transparent;
+      --btn-size: 1.8em;
 
-      &:before {
-        opacity: 0;
-      }
+      margin: 2px;
 
       .icon {
+        block-size: 1.7em;
+        color: var(--color-ink);
+        inline-size: 1.7em;
         opacity: 1;
       }
     }
