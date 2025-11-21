@@ -36,7 +36,7 @@ class Filter < ApplicationRecord
         result.mentioning(term, user: creator)
       end
 
-      result
+      result.distinct
     end
   end
 

@@ -14,7 +14,7 @@ And then run the development server:
 
     bin/dev
 
-You'll be able to access the app in development at http://development-tenant.fizzy.localhost:3006
+You'll be able to access the app in development at http://fizzy.localhost:3006
 
 ## Running tests
 

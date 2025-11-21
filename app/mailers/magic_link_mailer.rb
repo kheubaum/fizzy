@@ -3,11 +3,6 @@ class MagicLinkMailer < ApplicationMailer
     @magic_link = magic_link
     @identity = @magic_link.identity
 
-    mail to: @identity.email_address, subject: "Your Fizzy verification code"
+    mail to: @identity.email_address, subject: "Your Fizzy code is #{ @magic_link.code }"
   end
-
-  private
-    def default_url_options
-      Rails.application.config.action_mailer.default_url_options
-    end
 end

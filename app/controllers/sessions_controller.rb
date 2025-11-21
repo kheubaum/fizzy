@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   # FIXME: Remove this before launch!
-  if Rails.env.remote?
+  unless Rails.env.local?
     http_basic_authenticate_with \
       name: Rails.application.credentials.account_signup_http_basic_auth.name,
       password: Rails.application.credentials.account_signup_http_basic_auth.password,

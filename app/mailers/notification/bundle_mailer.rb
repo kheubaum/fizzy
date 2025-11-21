@@ -11,6 +11,6 @@ class Notification::BundleMailer < ApplicationMailer
 
     mail \
       to: bundle.user.identity.email_address,
-      subject: "Latest Activity in Fizzy"
+      subject: "Fizzy#{ " (#{ Current.account.name })" if @user.identity.accounts.many? }: Latest Activity"
   end
 end

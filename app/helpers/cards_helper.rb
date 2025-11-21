@@ -33,6 +33,10 @@ module CardsHelper
     title.join(" ")
   end
 
+  def card_drafted_or_added(card)
+    card.drafted? ? "Drafted" : "Added"
+  end
+
   def card_social_tags(card)
     tag.meta(property: "og:title", content: "#{card.title} | #{card.board.name}") +
     tag.meta(property: "og:description", content: format_excerpt(@card&.description, length: 200)) +

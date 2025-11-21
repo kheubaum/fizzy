@@ -5,7 +5,7 @@ module HotkeysHelper
       if key == "ctrl" && platform.mac?
         "⌘"
       elsif key == "enter"
-        "⏎"
+        platform.mac? ? "return" : "enter"
       elsif key == "shift"
         "⇧"
       else

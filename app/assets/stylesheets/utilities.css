@@ -249,4 +249,14 @@
       display: unset;
     }
   }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* Edge */
+    scrollbar-width: none; /* FF */
+
+    /* Chrome/Safari/Opera */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 }

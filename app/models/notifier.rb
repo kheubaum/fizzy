@@ -14,7 +14,8 @@ class Notifier
 
   def notify
     if should_notify?
-      recipients.map do |recipient|
+      # Processing recipients in order avoids deadlocks if notifications overlap.
+      recipients.sort_by(&:id).map do |recipient|
         Notification.create! user: recipient, source: source, creator: creator
       end
     end

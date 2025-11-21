@@ -11,9 +11,9 @@
           <%= form.rich_textarea :body, required: true, autofocus: true, placeholder: new_comment_placeholder(@card) do %>
             <%= general_prompts(@card.board) %>
           <% end %>
-          <div class="flex gap-half justify-start">
+          <div class="flex gap-half justify-start align-center">
             <%= form.button class: "btn btn--reversed", type: :submit do %>
-              <span>Save changes</span>
+              <span>Save</span>
             <% end %>
             <%= link_to card_comment_path(@card, @comment), class: "btn", data: { form_target: "cancel" } do %>
               <span>Cancel</span>

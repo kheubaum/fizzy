@@ -65,6 +65,6 @@ class Card::StatusesTest < ActiveSupport::TestCase
 
     card.publish
 
-    assert_equal Time.now, card.created_at
+    assert_equal Time.current, card.created_at
   end
 end

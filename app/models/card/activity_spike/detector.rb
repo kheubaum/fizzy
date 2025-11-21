@@ -21,11 +21,7 @@ class Card::ActivitySpike::Detector
 
     def register_activity_spike
       Card.suppressing_turbo_broadcasts do
-        if card.activity_spike
-          card.activity_spike.touch
-        else
-          card.create_activity_spike!
-        end
+        Card::ActivitySpike.find_or_create_by!(card: card).touch
       end
     end
 

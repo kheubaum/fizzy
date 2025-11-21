@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2025_11_17_202517) do
+ActiveRecord::Schema[8.2].define(version: 2025_11_20_203100) do
   create_table "accesses", id: :uuid, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.datetime "accessed_at"
     t.uuid "account_id", null: false
@@ -150,7 +150,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_17_202517) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_card_activity_spikes_on_account_id"
-    t.index ["card_id"], name: "index_card_activity_spikes_on_card_id"
+    t.index ["card_id"], name: "index_card_activity_spikes_on_card_id", unique: true
   end
 
   create_table "card_engagements", id: :uuid, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -748,40 +748,4 @@ ActiveRecord::Schema[8.2].define(version: 2025_11_17_202517) do
     t.index ["account_id"], name: "index_webhooks_on_account_id"
     t.index ["board_id", "subscribed_actions"], name: "index_webhooks_on_board_id_and_subscribed_actions", length: { subscribed_actions: 255 }
   end
-
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "board_publications", "boards"
-  add_foreign_key "card_activity_spikes", "cards"
-  add_foreign_key "card_goldnesses", "cards"
-  add_foreign_key "card_not_nows", "cards"
-  add_foreign_key "card_not_nows", "users"
-  add_foreign_key "cards", "columns"
-  add_foreign_key "closures", "cards"
-  add_foreign_key "closures", "users"
-  add_foreign_key "columns", "boards"
-  add_foreign_key "comments", "cards"
-  add_foreign_key "events", "boards"
-  add_foreign_key "magic_links", "identities"
-  add_foreign_key "mentions", "users", column: "mentionee_id"
-  add_foreign_key "mentions", "users", column: "mentioner_id"
-  add_foreign_key "notification_bundles", "users"
-  add_foreign_key "notifications", "users"
-  add_foreign_key "notifications", "users", column: "creator_id"
-  add_foreign_key "pins", "cards"
-  add_foreign_key "pins", "users"
-  add_foreign_key "push_subscriptions", "users"
-  add_foreign_key "search_queries", "users"
-  add_foreign_key "sessions", "identities"
-  add_foreign_key "steps", "cards"
-  add_foreign_key "taggings", "cards"
-  add_foreign_key "taggings", "tags"
-  add_foreign_key "user_settings", "users"
-  add_foreign_key "users", "identities"
-  add_foreign_key "watches", "cards"
-  add_foreign_key "watches", "users"
-  add_foreign_key "webhook_delinquency_trackers", "webhooks"
-  add_foreign_key "webhook_deliveries", "events"
-  add_foreign_key "webhook_deliveries", "webhooks"
-  add_foreign_key "webhooks", "boards"
 end

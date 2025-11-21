@@ -29,10 +29,14 @@ class JoinCodesController < ApplicationController
 
   private
     def set_join_code
-      @join_code ||= Account::JoinCode.active.find_by(code: params.expect(:code), account: Current.account)
+      @join_code ||= Account::JoinCode.find_by(code: params.expect(:code), account: Current.account)
     end
 
     def ensure_join_code_is_valid
-      head :not_found unless @join_code&.active?
+      if @join_code.nil?
+        head :not_found
+      elsif !@join_code.active?
+        render :inactive, status: :gone
+      end
     end
 end

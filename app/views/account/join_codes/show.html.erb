@@ -2,8 +2,9 @@
 
 <% content_for :header do %>
   <div class="header__actions header__actions--start">
-    <%= link_to account_settings_path, class: "btn borderless txt-medium", data: { controller: "hotkey", action: "keydown.left@document->hotkey#click" } do %>
+    <%= link_to account_settings_path, class: "btn btn--back borderless txt-medium", data: { controller: "hotkey", action: "keydown.left@document->hotkey#click" } do %>
       <span class="overflow-ellipsis flex align-center">
+        <%= icon_tag "arrow-left" %>
         <strong>Back to Account Settings</strong>
         <kbd class="txt-x-small margin-inline-start hide-on-touch">&larr;</kbd>
       </span>
@@ -30,7 +31,7 @@
     <% end %>
   </div>
 
-  <div class="center flex align-center gap">
+  <div class="center flex flex-wrap justify-center align-center gap">
     <%= tag.button class: "btn btn--link", data: {
           controller: "copy-to-clipboard", action: "copy-to-clipboard#copy",
           copy_to_clipboard_success_class: "btn--success", copy_to_clipboard_content_value: url } do %>

@@ -18,13 +18,13 @@ class HotkeysHelperTest < ActionView::TestCase
   test "mac enter" do
     emulate_mac
 
-    assert_equal "⏎+J", hotkey_label([ "enter", "J" ])
+    assert_equal "Return+J", hotkey_label([ "enter", "J" ])
   end
 
   test "linux enter" do
     emulate_linux
 
-    assert_equal "⏎+J", hotkey_label([ "enter", "J" ])
+    assert_equal "Enter+J", hotkey_label([ "enter", "J" ])
   end
 
   test "mac hyper" do

@@ -6,13 +6,11 @@ class FilterTest < ActiveSupport::TestCase
   end
 
   test "cards" do
-    Current.set session: sessions(:david) do
-      @new_board = Board.create! name: "Inaccessible Board", creator: users(:david)
-      @new_card = @new_board.cards.create!(status: "published")
+    @new_board = Board.create! name: "Inaccessible Board", creator: users(:david)
+    @new_card = @new_board.cards.create!(status: "published")
 
-      cards(:layout).comments.create!(body: "I hate haggis")
-      cards(:logo).comments.create!(body: "I love haggis")
-    end
+    cards(:layout).comments.create!(body: "I hate haggis")
+    cards(:logo).comments.create!(body: "I love haggis")
 
     assert_not_includes users(:kevin).filters.new.cards, @new_card
 
@@ -93,10 +91,8 @@ class FilterTest < ActiveSupport::TestCase
     end
     assert_nil Filter.find(filter.id).as_params[:tag_ids]
 
-    Current.set session: sessions(:david) do
-      assert_changes "Filter.exists?(filter.id)" do
-        boards(:writebook).destroy!
-      end
+    assert_changes "Filter.exists?(filter.id)" do
+      boards(:writebook).destroy!
     end
   end
 

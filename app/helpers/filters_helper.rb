@@ -15,11 +15,14 @@ module FiltersHelper
     user_filtering.selected_board_titles.collect { tag.strong it }.to_sentence.html_safe
   end
 
-  def filter_place_menu_item(path, label, icon, new_window: false, current: false)
-    link_to_params = new_window ? { target: "_blank" } : {}
+  def filter_place_menu_item(path, label, icon, new_window: false, current: false, turbo: true)
+    link_to_params = {}
+    link_to_params.merge!({ target: "_blank" }) if new_window
+    link_to_params.merge!({ data: { turbo: false } }) unless turbo
+
     tag.li class: "popup__item", id: "filter-place-#{label.parameterize}", data: { filter_target: "item", navigable_list_target: "item" }, aria: { checked: current } do
       concat icon_tag(icon, class: "popup__icon")
-      concat(link_to(path, link_to_params.merge(class: "popup__btn btn")) do
+      concat(link_to(path, link_to_params.merge(class: "popup__btn btn"), data: { turbo: turbo }) do
         concat tag.span(label, class: "overflow-ellipsis")
         concat icon_tag("check", class: "checked flex-item-justify-end", "aria-hidden": true)
       end)

@@ -38,11 +38,13 @@ class Notification::Bundle < ApplicationRecord
 
   def deliver
     user.in_time_zone do
-      processing!
+      Current.with_account(user.account) do
+        processing!
 
-      Notification::BundleMailer.notification(self).deliver if deliverable?
+        Notification::BundleMailer.notification(self).deliver if deliverable?
 
-      delivered!
+        delivered!
+      end
     end
   end
 

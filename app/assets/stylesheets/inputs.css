@@ -49,8 +49,11 @@
       }
     }
 
+    /* Target mobile Safari only */
     @supports (hanging-punctuation: first) and (font: -apple-system-body) and (-webkit-appearance: none) {
-      font-size: max(16px, 1em) !important;
+      @media (hover: none) {
+        font-size: max(16px, 1em) !important;
+      }
     }
   }
 

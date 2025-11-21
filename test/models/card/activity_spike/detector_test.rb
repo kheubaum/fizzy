@@ -39,6 +39,21 @@ class Card::ActivitySpike::DetectorTest < ActiveSupport::TestCase
     assert @card.reload.activity_spike.updated_at > original_last_spike_at
   end
 
+  test "concurrent spike creation should not create multiple spikes for a card" do
+    multiple_people_comment_on(@card)
+    @card.activity_spike&.destroy
+
+    5.times.map do
+      Thread.new do
+        ActiveRecord::Base.connection_pool.with_connection do
+          Card.find(@card.id).detect_activity_spikes
+        end
+      end
+    end.each(&:join)
+
+    assert_equal 1, Card::ActivitySpike.where(card: @card).count
+  end
+
   private
     def assert_activity_spike_detected(card: @card)
       assert card.activity_spike.blank?
