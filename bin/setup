@@ -31,6 +31,36 @@ if ! command -v gum &>/dev/null; then
   echo
 fi
 
+# Install mise if needed
+if ! command -v mise &>/dev/null; then
+  echo
+  echo "▸ Installing mise"
+  if command -v pacman &>/dev/null; then
+    sudo pacman -S --noconfirm mise
+  elif command -v brew &>/dev/null; then
+    brew install mise
+  else
+    echo "Please install mise: https://mise.jdx.dev/installing-mise.html#installation-methods"
+    exit 1
+  fi
+  echo
+fi
+
+# Install gh if needed
+if ! command -v gh &>/dev/null; then
+  echo
+  echo "▸ Installing GitHub CLI"
+  if command -v pacman &>/dev/null; then
+    sudo pacman -S --noconfirm gh
+  elif command -v brew &>/dev/null; then
+    brew install gh
+  else
+    echo "Please install GitHub CLI: https://github.com/cli/cli#installation"
+    exit 1
+  fi
+  echo
+fi
+
 step() {
   local step_name="$1"
   shift
