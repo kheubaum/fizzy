@@ -163,9 +163,8 @@ Rails.application.routes.draw do
 
   resource :landing
 
-  resource :identity, only: :show
-
   namespace :my do
+    resource :identity, only: :show
     resources :access_tokens
     resources :pins
     resource :timezone
