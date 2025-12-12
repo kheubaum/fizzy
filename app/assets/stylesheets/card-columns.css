@@ -44,6 +44,10 @@
       --column-width-expanded: calc(100vw - var(--column-gap) * 4);
 
       scroll-snap-type: inline mandatory;
+
+      &:not(:has(.is-expanded)) {
+        grid-template-columns: auto var(--column-width-collapsed) auto;
+      }
     }
   }
 
