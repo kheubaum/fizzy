@@ -16,7 +16,7 @@
       <%= yield %>
     </main>
 
-    <footer id="footer">
+    <footer id="footer" class="hide-on-native">
       <%= yield :footer %>
 
       <% if Current.user && !@hide_footer_frames %>

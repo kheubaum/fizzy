@@ -13,5 +13,21 @@
     .show-on-native {
       display: unset;
     }
+
+    /* Header
+    /* ------------------------------------------------------------------------ */
+
+    .header:is(
+      :not(:has(.header__actions)),
+      :not(:has(.header__actions--end)):has(.header__actions--start .btn--back:only-child)
+    ) {
+      display: none;
+    }
+
+    .header__actions {
+      .btn--back {
+        display: none;
+      }
+    }
   }
 }
