@@ -1,11 +1,13 @@
 require "test_helper"
 
 class Account::Subscriptions::CardCreationTest < ActionDispatch::IntegrationTest
+  setup do
+    sign_in_as :mike
+  end
+
   # Nearing limits - shown in card creation footer
 
   test "admin sees nearing card limit notice" do
-    sign_in_as :mike
-
     accounts(:initech).update_column(:cards_count, 950)
 
     get card_path(cards(:unfinished_thoughts), script_name: accounts(:initech).slug)
@@ -15,8 +17,6 @@ class Account::Subscriptions::CardCreationTest < ActionDispatch::IntegrationTest
   end
 
   test "admin sees nearing storage limit notice" do
-    sign_in_as :mike
-
     Account.any_instance.stubs(:bytes_used).returns(600.megabytes)
 
     get card_path(cards(:unfinished_thoughts), script_name: accounts(:initech).slug)
@@ -28,8 +28,6 @@ class Account::Subscriptions::CardCreationTest < ActionDispatch::IntegrationTest
   # Exceeding limits - shown instead of create buttons
 
   test "admin sees exceeding card limit notice" do
-    sign_in_as :mike
-
     accounts(:initech).update_column(:cards_count, 1001)
 
     get card_path(cards(:unfinished_thoughts), script_name: accounts(:initech).slug)
@@ -39,8 +37,6 @@ class Account::Subscriptions::CardCreationTest < ActionDispatch::IntegrationTest
   end
 
   test "admin sees exceeding storage limit notice" do
-    sign_in_as :mike
-
     Account.any_instance.stubs(:bytes_used).returns(1.1.gigabytes)
 
     get card_path(cards(:unfinished_thoughts), script_name: accounts(:initech).slug)
@@ -52,7 +48,7 @@ class Account::Subscriptions::CardCreationTest < ActionDispatch::IntegrationTest
   # Paid accounts under limits - no notices
 
   test "paid account under limits sees no notices" do
-    sign_in_as :kevin
+    logout_and_sign_in_as :kevin
 
     accounts(:"37s").subscription.update!(plan: Plan.paid, status: :active)
 
@@ -66,8 +62,6 @@ class Account::Subscriptions::CardCreationTest < ActionDispatch::IntegrationTest
   # Comped accounts under limits - no notices
 
   test "comped account under limits sees no notices" do
-    sign_in_as :mike
-
     accounts(:initech).comp
 
     get card_path(cards(:unfinished_thoughts), script_name: accounts(:initech).slug)
