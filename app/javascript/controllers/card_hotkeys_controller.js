@@ -43,7 +43,7 @@ export default class extends Controller {
     if (!focusedList) return null
 
     const currentItem = focusedList.currentItem
-    if (currentItem?.classList.contains("card")) {
+    if (currentItem?.classList.contains("card") && !this.#hotkeysDisabled(focusedList)) {
       return { card: currentItem, controller: focusedList }
     }
     return null
@@ -116,6 +116,10 @@ export default class extends Controller {
         await controller.selectItem(newVisibleItems[nextIndex])
       }
     }
+  }
+
+  #hotkeysDisabled(navigableList) {
+    return navigableList?.element.dataset.cardHotkeysDisabled === "true"
   }
 
   #keyHandlers = {
