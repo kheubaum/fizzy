@@ -292,7 +292,6 @@
     }
 
     .cards__list {
-      align-items: start;
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
@@ -497,19 +496,19 @@
   }
 
   /* Override card styles within columns
+  /* Adding .board-tools here since it sits outside the cards container on mobile */
   /* ------------------------------------------------------------------------ */
 
-  body:has(.cards) {
-    .card {
-      --block-space: 1em;
-      --block-space-half: 0.5em;
-      --card-padding-inline: 1em;
-      --text-xx-large: 1.6em;
-      --text-x-small: 1em;
+  .cards .card,
+  .board-tools {
+    --block-space: 1em;
+    --block-space-half: 0.5em;
+    --card-padding-inline: 1em;
+    --text-xx-large: 1.6em;
+    --text-x-small: 1em;
 
-      /* Set lower limit for font size */
-      font-size: clamp(0.6rem, 0.85cqi, 100px);
-    }
+    /* Set lower limit for font size */
+    font-size: clamp(0.6rem, 0.85cqi, 100px);
 
     .card__comments {
       --column-gap: 0.8ch;
